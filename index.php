@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>read excel into mysql</title>
+</head>
+<body>
+
+<form action="index.php" method="post" enctype="myltipart/form-data">
+<label for="file">导入文件：</label>
+<input type="file" name="file" id="file" />
+<br />
+<input type="submit" name="submit" value="导入" />
+	
+
+
+
+</form>
+
+
+</body>
+</html>
