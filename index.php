@@ -1,45 +1,72 @@
-<?php 
-require_once('conn.php'); 
-require_once ('../jpgraph/src/jpgraph.php');
-require_once ('../jpgraph/src/jpgraph_line.php');
-require_once ('../jpgraph/src/jpgraph_bar.php');
-?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
 	<title>基站数据查询</title>
-	<!--<script type="text/javascript">
-       function show_root(){
-         var root=document.getElementById("file").value;
-         myform.root.value=root;
-
-       }
-
-	</script>-->
 	<link href="./css/jcsjys.css" rel="stylesheet">
 
+<script type="text/javascript">
+
+var xmlHttp
+
+function showCustomer(str)
+{ 
+xmlHttp=GetXmlHttpObject();
+if (xmlHttp==null)
+  {
+  alert ("您的浏览器不支持AJAX！");
+  return;
+  } 
+var url="search.php";
+url=url+"?q="+str;
+url=url+"&sid="+Math.random();
+xmlHttp.onreadystatechange=stateChanged;
+xmlHttp.open("GET",url,true);
+xmlHttp.send(null);
+}
+
+function stateChanged()
+{ 
+if (xmlHttp.readyState==4)
+{ 
+document.getElementById("txtHint").innerHTML=xmlHttp.responseText;
+}
+}
+
+function GetXmlHttpObject()
+{
+var xmlHttp=null;
+try
+  {
+  // Firefox, Opera 8.0+, Safari
+  xmlHttp=new XMLHttpRequest();
+  }
+catch (e)
+  {
+  // Internet Explorer
+  try
+    {
+    xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+    }
+  catch (e)
+    {
+    xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  }
+return xmlHttp;
+}
+</script>
 
 </head>
 <body>
 
-
-
-<!--<form action="upload.php" method="post" enctype="multipart/form-data">
-<label for="file">导入文件：</label>
-<input type="file" name="file" id="file" />
-//<input type="text" id="root" type="hidden" name="root" />
-//<input type="submit" name="submit" onclick="show_root()"/> 
-<input type="submit" name="submit" value="上传" />
-	
-</form>-->
 <div id="container">
 <div id="header">
 	<h1>基站数据查询</h1>
 
 </div>
-<div id="menu">
+<!--<div id="menu">
 	<h2>menu1</h2>
 	<ul>
 		<li>menu2</li>
@@ -47,128 +74,24 @@ require_once ('../jpgraph/src/jpgraph_bar.php');
 		<li>menu4</li>
 	</ul>
 
-</div>
+</div>-->
 <div id="search">
-<form method="post" action="index.php" name="search">  
-<input name="search" type="text" value="" size="15">   
-<input type="submit" value="search">  
+<form>
+<input onchange="showCustomer(this.value)" type="text" size="15" />
+<!--<button type="button" onclick="loadXMLDoc()">查询</button>-->
+
 </form>
 </div>
 <div id="content">
 <!--带搜索框的数据展示-->
 
-<!--<select name="jzb" id="jzb">
-<option value="1">请选择</option>
-<option value="2">基站表20150204</option>
-
-<!--<?php
-$sql="select * from jizhanbiao";
-$result=mysql_query($sql,$con);
-while($row=mysql_fetch_assoc($result)){
-?>
-
-<option value="<?php echo $row['*'] ?>"><?php echo $row['xiaoquming'] ?></option> //这个值要用php的方法取出来
-<?php
-}
-
-?>-->
-</select>
-<!--
-<?php
-
-$type=$_GET['jzb'];
-    switch ($type) {
-    	case '2':
-        $sql="SELECT * from jizhanbiao";
-        $result = mysql_query($sql);
-    
-    
-
-    $table="<table>";
-    $table.='<td>小区名称</td>';
-    $table.='<td>代维公司</td>';
-    $table.='<td>基站名称</td>';
-    if (mysql_num_rows($result) < 1) echo '没有数据';
-
-    	while($row=mysql_fetch_assoc($result)){
-
-    		$table.='<tr>';
-    		$table.='<td align="center">'.$row['xiaoquming'].'</td>';
-    		$table.='<td align="center">'.$row['daiwei'].'</td>';
-    		$table.='<td align="center">'.$row['jizhanming'].'</td>';
-    		$table.="</tr>";
-    	}
-
-
-    echo $table;
-
-    break;
-    }
-
-
-    
-
-
-?>
-
--->
-
-
-
-
-
-<?php
-  
-    
-      $searchs=$_POST['search'];
-      $searchs=trim($searchs);
-      if(!$searchs){
-
-        echo '搜索框不能为空';
-        exit;
-      }
-
-    $sql="SELECT * from jizhanbiao where xiaoquming like '%$searchs%'";
-    $result = mysql_query($sql,$con);
-
-    
-    echo '</br>';
-    echo '</br>';
-    echo '</br>';
-
-    $table="<table>";
-    $table.='<td>小区名称</td>';
-    $table.='<td>代维公司</td>';
-    $table.='<td>基站名称</td>';
-    if (mysql_num_rows($result) < 1) echo '没有数据';
-
-    	while($row=mysql_fetch_assoc($result)){
-
-    		$table.='<tr>';
-    		$table.='<td align="center">'.$row['xiaoquming'].'</td>';
-    		$table.='<td align="center">'.$row['daiwei'].'</td>';
-    		$table.='<td align="center">'.$row['jizhanming'].'</td>';
-    		$table.="</tr>";
-    	}
-
-
-    echo $table;
-    
-?>
-
-
-
-
+<h3>查询结果</h3>
+<div id="txtHint"></div>
 
 </div>
-
-
-
-
-
-
+<div id="footer"></div>
 </div>
-<div id="footer">copy</div>
+
 
 
 
