@@ -1,0 +1,17 @@
+div#menu{
+	height: 200px;width: 100px;float: left;
+}
+div#header{
+	text-align: left;
+}
+}
+div#content{
+    width: 800px;
+    height: 2000px;
+	float: right;
+}
+div#search{
+	height: 50px;
+	width: 200px;
+	float: right;
+}

@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-	<title>read excel into mysql</title>
+    <meta charset="UTF-8">
+	<title>基站数据查询</title>
+	<!--<link href="./css/jcsjys.css" rel="stylesheet">-->
+
+<script src="xianshi.js"></script>
+
 </head>
 <body>
 
-<form action="index.php" method="post" enctype="myltipart/form-data">
-<label for="file">导入文件：</label>
-<input type="file" name="file" id="file" />
-<br />
-<input type="submit" name="submit" value="导入" />
-	
-123123
+<h1>基站数据查询</h1>
 
-test again
-
+<form name="chaxun">
+<input onchange="showCustomer(this.value)" type="text" size="15" onkeydown="keyDown();" />
+<input type="button" id="btn" value="查找">
 
 </form>
 
+</br></br>
+<b>查询结果</b>
+<p><div id="txtHint"></div></p>
 
 </body>
 </html>
